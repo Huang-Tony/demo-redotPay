@@ -1,0 +1,4 @@
+liteflow:
+  rule-source: flow.el.xml
+  parser-mode: EL_XML
+  

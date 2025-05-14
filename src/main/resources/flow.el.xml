@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow>
+
+<!-- For greater than 5 check -->
+<chain name="greaterThan5Chain">
+    THEN(numberCheckCmp, printResultCmp)
+</chain>
+
+<!-- For integer check -->
+<chain name="integerCheckChain">
+    THEN(integerCheckCmp, printResultCmp)
+</chain>
+
+</flow>
+
+
+    <!-- <chain name="demoChain">
+        THEN(a, b, c); 
+    </chain> -->

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Checker</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .radio-group {
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Checker</h1>
+        
+        <form method="POST" th:action="@{/check-number}">
+            <div>
+                <label for="number">Enter a number:</label>
+                <input type="number" id="number" name="number" step="any" 
+                       th:value="${number}" required>
+            </div>
+            
+            <div class="radio-group">
+                <label>Check Type:</label>
+                <input type="radio" id="greaterThan5" name="checkType" 
+                       value="greaterThan5" th:checked="${checkType == 'greaterThan5'}">
+                <label for="greaterThan5">Greater than 5?</label>
+                
+                <input type="radio" id="isInteger" name="checkType" 
+                       value="isInteger" th:checked="${checkType == 'isInteger'}">
+                <label for="isInteger">Is integer?</label>
+            </div>
+            
+            <button type="submit">Check Number</button>
+        </form>
+        
+        <div class="result-container" th:if="${result}">
+            <h3>Results:</h3>
+            <p>Input Number: <span th:text="${number}">0</span></p>
+            
+            <h4>Execution Steps:</h4>
+            <ul>
+                <li th:each="step : ${steps}" th:text="${step}"></li>
+            </ul>
+            
+            <h4>Final Result: <span th:text="${result}"></span></h4>
+        </div>
+    </div>
+</body>
+</html>
