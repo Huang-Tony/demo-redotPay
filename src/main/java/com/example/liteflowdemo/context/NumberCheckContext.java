@@ -5,6 +5,7 @@ import java.util.List;
 
 public class NumberCheckContext {
     private double inputNumber;
+    private String condition;
     private List<String> executionSteps = new ArrayList<>();
     private String finalResult;
 
@@ -15,6 +16,14 @@ public class NumberCheckContext {
 
     public void setInputNumber(double inputNumber) {
         this.inputNumber = inputNumber;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 
     public List<String> getExecutionSteps() {

@@ -15,8 +15,10 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        .radio-group {
-            margin: 15px 0;
+        .condition-examples {
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #666;
         }
     </style>
 </head>
@@ -31,15 +33,13 @@
                        th:value="${number}" required>
             </div>
             
-            <div class="radio-group">
-                <label>Check Type:</label>
-                <input type="radio" id="greaterThan5" name="checkType" 
-                       value="greaterThan5" th:checked="${checkType == 'greaterThan5'}">
-                <label for="greaterThan5">Greater than 5?</label>
-                
-                <input type="radio" id="isInteger" name="checkType" 
-                       value="isInteger" th:checked="${checkType == 'isInteger'}">
-                <label for="isInteger">Is integer?</label>
+            <div>
+                <label for="condition">Enter condition:</label>
+                <input type="text" id="condition" name="condition" 
+                       th:value="${condition}" required>
+                <div class="condition-examples">
+                    Examples: >5
+                </div>
             </div>
             
             <button type="submit">Check Number</button>
@@ -48,6 +48,7 @@
         <div class="result-container" th:if="${result}">
             <h3>Results:</h3>
             <p>Input Number: <span th:text="${number}">0</span></p>
+            <p>Condition: <span th:text="${condition}">>5</span></p>
             
             <h4>Execution Steps:</h4>
             <ul>

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow>
+    <!-- Dynamic condition chain -->
+    <chain name="dynamicConditionChain">
+        THEN(dynamicConditionCmp, printResultCmp)
+    </chain>
 
-<!-- For greater than 5 check -->
-<chain name="greaterThan5Chain">
-    THEN(numberCheckCmp, printResultCmp)
-</chain>
+    <!-- Keep existing chains for backward compatibility -->
+    <chain name="greaterThan5Chain">
+        THEN(numberCheckCmp, printResultCmp)
+    </chain>
 
-<!-- For integer check -->
-<chain name="integerCheckChain">
-    THEN(integerCheckCmp, printResultCmp)
-</chain>
-
+    <chain name="integerCheckChain">
+        THEN(integerCheckCmp, printResultCmp)
+    </chain>
 </flow>
-
-
-    <!-- <chain name="demoChain">
-        THEN(a, b, c); 
-    </chain> -->
