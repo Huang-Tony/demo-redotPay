@@ -32,15 +32,16 @@
                 <input type="number" id="number" name="number" step="any" 
                        th:value="${number}" required>
             </div>
-            
-            <div>
-                <label for="condition">Enter condition:</label>
-                <input type="text" id="condition" name="condition" 
-                       th:value="${condition}" required>
-                <div class="condition-examples">
-                    Examples: >5
-                </div>
-            </div>
+
+<div>
+    <label for="condition">Enter condition (use 'x' as variable):</label>
+    <input type="text" id="condition" name="condition" 
+           th:value="${condition}" required placeholder="e.g., x > 5">
+    <div class="condition-examples">
+        Examples: x > 5 
+    </div>
+</div>
+<!-- Rest of the HTML remains the same -->
             
             <button type="submit">Check Number</button>
         </form>

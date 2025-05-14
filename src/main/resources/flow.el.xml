@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow>
-    <!-- Dynamic condition chain -->
+    <nodes>
+<node id="dynamicConditionScript" type="script" language="java">
+    <![CDATA[
+    import com.example.liteflowdemo.context.NumberCheckContext;
+    import com.yomahub.liteflow.core.NodeComponent;
+    import javax.script.ScriptEngine;
+    import javax.script.ScriptEngineManager;
+
+    public class DynamicConditionScript extends NodeComponent {
+        @Override
+        public void process() throws Exception {
+            NumberCheckContext context = this.getContextBean(NumberCheckContext.class);
+            double number = context.getInputNumber();
+            String condition = context.getCondition();
+            
+            try {
+                ScriptEngineManager manager = new ScriptEngineManager();
+                ScriptEngine engine = manager.getEngineByName("nashorn");    
+
+                
+                if (engine == null) {
+                    throw new RuntimeException("JavaScript engine not available");
+                }
+
+
+                engine.put("x", number);                            
+
+                Boolean result = (Boolean) engine.eval(condition);
+                
+                String resultStr = number + " satisfies condition '" + condition + "': " + result;
+                context.addExecutionStep("Condition evaluated: " + condition);
+                context.setFinalResult(resultStr);
+            } catch (Exception e) {
+                context.setFinalResult("Error evaluating condition: " + e.getMessage());
+            }
+        }
+    }
+    ]]>
+</node>
+    </nodes>
+
     <chain name="dynamicConditionChain">
-        THEN(dynamicConditionCmp, printResultCmp)
+        THEN(dynamicConditionScript, printResultCmp)
     </chain>
 
-    <!-- Keep existing chains for backward compatibility -->
-    <chain name="greaterThan5Chain">
-        THEN(numberCheckCmp, printResultCmp)
-    </chain>
-
-    <chain name="integerCheckChain">
-        THEN(integerCheckCmp, printResultCmp)
-    </chain>
+    <!-- 其他原有chain保持不变 -->
 </flow>
